@@ -1,0 +1,29 @@
+html, body { margin: 0; min-height: 100%; background: #08111d; }
+/* 只约束独立游戏容器；不屏蔽个人网站其它区域的选择/滚动/上下文菜单。 */
+#WebGameStage {
+  box-sizing: border-box;
+  height: 100vh;
+  height: 100dvh;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+    env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#GameDiv { flex: none; overflow: hidden; }
+#Cocos3dGameContainer, #GameCanvas { width: 100%; height: 100%; display: block; }
+#GameCanvas {
+  outline: none;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  background: transparent;
+}
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}

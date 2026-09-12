@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>花园防线：月光守卫</title>
+  <link rel="stylesheet" href="moonlight-guardian.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="top-bar">
+      <section class="brand-block" aria-label="游戏标题">
+        <h1>花园防线：月光守卫</h1>
+        <p>布置月光守卫，阻挡灰影军团穿越花园。</p>
+      </section>
+
+      <section class="status-panel" aria-label="游戏状态">
+        <div class="status-pill">
+          <span class="status-label">能量晶</span>
+          <strong id="crystalCount">100</strong>
+        </div>
+        <div class="status-pill">
+          <span class="status-label">波次</span>
+          <strong id="waveLabel">1 / 10</strong>
+        </div>
+        <div class="status-pill">
+          <span class="status-label">关卡</span>
+          <strong id="levelLabel">1 / 5</strong>
+        </div>
+        <button id="pauseButton" class="control-button" type="button">暂停</button>
+        <button id="menuButton" class="control-button" type="button">关卡菜单</button>
+        <button id="restartButton" class="control-button" type="button">重新开始</button>
+      </section>
+    </header>
+
+    <section id="cardBar" class="card-bar" aria-label="单位卡片"></section>
+
+    <section class="canvas-wrap" aria-label="战场">
+      <div class="battle-tools" aria-label="战场工具">
+        <button
+          id="collectButton"
+          class="map-tool-button collect-tool"
+          type="button"
+          data-tooltip="一键收集能量"
+          aria-label="一键收集能量"
+        >
+          <svg class="tool-hand-icon collect-hand" viewBox="0 0 48 48" aria-hidden="true">
+            <path
+              class="hand-fill"
+              d="M18.2 26.7V12.4a3.2 3.2 0 0 1 6.4 0v10.1-13a3.2 3.2 0 0 1 6.4 0v13.4-9.6a3.2 3.2 0 0 1 6.4 0v13.3c0 10-5.8 15.4-14.2 15.4h-1.1c-5 0-8.7-2.2-11.3-6.5l-4.4-7.3a3.2 3.2 0 0 1 5.2-3.7l6.6 6.8v-4.6Z"
+            />
+            <path class="hand-line" d="M24.6 22.5v5.1M31 22.9v4.7M18.2 26.7v4.6" />
+            <path class="hand-shine" d="M21.4 12.4v8.1M27.8 9.5v10" />
+          </svg>
+          <span id="collectCountBadge" class="tool-count hidden">0</span>
+        </button>
+        <button
+          id="removeButton"
+          class="map-tool-button remove-tool"
+          type="button"
+          data-tooltip="移除守卫"
+          aria-label="移除守卫"
+          aria-pressed="false"
+        >
+          <svg class="tool-hand-icon remove-hand" viewBox="0 0 48 48" aria-hidden="true">
+            <path
+              class="hand-fill"
+              d="M12 19.6V9.8a3.2 3.2 0 0 1 6.4 0v10.8-15a3.2 3.2 0 0 1 6.4 0v15.1-10a3.2 3.2 0 0 1 6.4 0v10.7-6.8a3.2 3.2 0 0 1 6.4 0v12.2c0 9.8-5.9 15.2-14.5 15.2h-1c-5.2 0-8.9-2.3-11.6-6.6l-4.2-6.8a3.2 3.2 0 0 1 5.1-3.8l6.6 6.5v-6.7c0-2.9-2.3-5.2-5.2-5.2H12Z"
+            />
+            <path class="hand-line" d="M18.4 20.6v6.1M24.8 20.7v6M31.2 21.4v5.3" />
+            <path class="hand-shine" d="M15.2 9.8v6.7M21.6 5.6v11.1" />
+          </svg>
+          <span class="tool-mark" aria-hidden="true">×</span>
+        </button>
+      </div>
+      <canvas id="gameCanvas" width="960" height="560">
+        当前浏览器不支持 Canvas。
+      </canvas>
+      <div id="messageOverlay" class="message-overlay hidden">
+        <h2 id="messageTitle"></h2>
+        <p id="messageText"></p>
+        <div class="overlay-actions">
+          <button id="overlayNextButton" class="control-button" type="button">下一关</button>
+          <button id="overlayRestartButton" class="control-button" type="button">再来一局</button>
+          <button id="overlayMenuButton" class="control-button" type="button">返回关卡</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="menuOverlay" class="menu-overlay">
+      <div id="startMenu" class="menu-panel">
+        <p class="menu-kicker">原创横向分路塔防</p>
+        <h2>花园防线：月光守卫</h2>
+        <p>选择一片月光花园，布置守卫，抵御灰影军团的分路入侵。</p>
+        <div class="menu-actions">
+          <button id="continueButton" class="control-button primary-button" type="button">开始游戏</button>
+          <button id="openLevelSelectButton" class="control-button" type="button">选择关卡</button>
+        </div>
+        <p id="progressText" class="progress-text"></p>
+      </div>
+
+      <div id="levelSelectMenu" class="menu-panel hidden">
+        <p class="menu-kicker">关卡选择</p>
+        <h2>月光花园路线图</h2>
+        <div id="levelGrid" class="level-grid" aria-label="关卡列表"></div>
+        <div class="menu-actions">
+          <button id="backToStartButton" class="control-button" type="button">返回</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="moonlight-guardian-v2.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="《萤火列车：雾境远征》原创竖屏 Roguelike 射击游戏项目介绍、在线试玩与多平台下载。">
+  <title>《萤火列车：雾境远征》项目详情</title>
+  <style>
+    :root{color-scheme:dark;--navy:#071426;--panel:rgba(11,31,53,.88);--panel-soft:rgba(18,48,69,.72);--cyan:#67e8f9;--gold:#f6cf74;--text:#eef8ff;--muted:#a9c2d3;--line:rgba(103,232,249,.25)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--text);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:radial-gradient(circle at 50% 8%,rgba(42,117,147,.38),transparent 36rem),linear-gradient(160deg,#071426 0%,#0b2033 55%,#050b15 100%)}
+    a{color:inherit}.shell{width:min(1100px,calc(100% - 32px));margin:0 auto;padding:26px 0 72px}.back{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px;color:var(--muted);font-size:14px;text-decoration:none}.back:hover,.back:focus-visible{color:var(--cyan)}
+    .hero{display:grid;grid-template-columns:minmax(280px,1.08fr) minmax(290px,.92fr);gap:clamp(30px,5vw,62px);align-items:center}.cover{position:relative;min-height:540px;overflow:hidden;border:1px solid rgba(103,232,249,.35);border-radius:24px;background:#102d43;box-shadow:0 24px 60px rgba(0,0,0,.36)}.cover img{display:block;width:100%;height:100%;min-height:540px;object-fit:cover;object-position:center 34%;opacity:.84}.cover::after{position:absolute;inset:0;background:linear-gradient(180deg,transparent 48%,rgba(3,13,24,.82));content:"";pointer-events:none}.cover-copy{position:absolute;z-index:1;right:22px;bottom:20px;left:22px}.cover-copy small{color:var(--cyan);font-size:12px;letter-spacing:.16em}.cover-copy strong{display:block;margin-top:5px;font-size:21px;font-weight:500}
+    .eyebrow{margin:0 0 12px;color:var(--cyan);font-size:13px;font-weight:700;letter-spacing:.14em}.version{display:inline-flex;margin-bottom:15px;padding:6px 10px;border:1px solid rgba(246,207,116,.35);border-radius:999px;color:var(--gold);background:rgba(246,207,116,.08);font-size:12px}h1{margin:0;color:var(--gold);font-size:clamp(38px,6vw,64px);font-weight:600;line-height:1.14}.english{margin:11px 0 0;color:#d7ebf5;font-size:14px;letter-spacing:.05em}.subtitle{margin:10px 0 24px;color:var(--text);font-size:21px}.description{margin:0;color:var(--muted);font-size:16px;line-height:1.82}
+    .tags{display:flex;flex-wrap:wrap;gap:9px;margin:23px 0 0;padding:0;list-style:none}.tags li{padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:#d9f7ff;background:rgba(16,55,77,.65);font-size:13px}.primary-actions{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:29px}.button{display:flex;min-height:50px;align-items:center;justify-content:center;padding:0 18px;border:1px solid var(--line);border-radius:12px;background:rgba(16,55,77,.68);font-weight:700;text-align:center;text-decoration:none;transition:transform .18s ease,background .18s ease}.button:hover,.button:focus-visible{transform:translateY(-2px);background:rgba(29,82,108,.9)}.button--play{grid-column:1/-1;border-color:var(--gold);color:#082033;background:linear-gradient(135deg,var(--gold),#fff0a8);box-shadow:0 10px 28px rgba(246,207,116,.2)}.button--play:hover,.button--play:focus-visible{background:#fff1b0}.release-link{display:inline-block;margin-top:16px;color:var(--muted);font-size:13px;text-underline-offset:4px}.release-link:hover,.release-link:focus-visible{color:var(--cyan)}
+    .section{margin-top:clamp(64px,9vw,104px)}.section-head{display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:start}.section-head span{padding-top:8px;color:var(--gold);font-size:12px;letter-spacing:.14em}.section-head h2{margin:0;font-size:clamp(27px,4vw,40px);font-weight:400}.section-head p{margin:8px 0 0;color:var(--muted);line-height:1.7}.features{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}.feature{min-height:150px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel-soft)}.feature span{color:var(--cyan);font-size:12px;letter-spacing:.12em}.feature h3{margin:30px 0 8px;font-size:18px}.feature p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+    .platforms{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}.platform{display:flex;min-height:235px;padding:23px;flex-direction:column;border:1px solid var(--line);border-radius:19px;background:var(--panel)}.platform__status{width:max-content;padding:5px 9px;border-radius:999px;color:#a9eff7;background:rgba(103,232,249,.1);font-size:11px}.platform h3{margin:19px 0 8px;font-size:22px}.platform p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}.platform .button{margin-top:auto}.instructions{margin-top:13px!important;color:#88a4b7!important;font-size:12px!important;line-height:1.6!important}.notice{margin-top:22px;padding:18px 20px;border-left:3px solid var(--gold);border-radius:0 12px 12px 0;background:rgba(246,207,116,.07);color:#c6d5df;font-size:13px;line-height:1.7}
+    footer{margin-top:68px;padding-top:22px;border-top:1px solid var(--line);color:#829caf;font-size:12px;text-align:center}
+    @media(max-width:860px){.hero{grid-template-columns:1fr}.cover{min-height:460px;order:2}.cover img{min-height:460px}.content{order:1}.features{grid-template-columns:repeat(2,1fr)}.platforms{grid-template-columns:1fr}.platform{min-height:210px}}
+    @media(max-width:560px){.shell{width:min(100% - 24px,1100px);padding-top:max(16px,env(safe-area-inset-top))}.primary-actions{grid-template-columns:1fr}.button--play{grid-column:auto}.features{grid-template-columns:1fr}.section-head{grid-template-columns:1fr;gap:6px}.section-head span{padding:0}.cover,.cover img{min-height:400px}.button{width:100%}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <a class="back" href="/">← 返回作品集</a>
+    <section class="hero" aria-labelledby="project-title">
+      <div class="cover">
+        <img src="../firefly-train-cover.png" alt="《萤火列车：雾境远征》微光森林战斗场景">
+        <div class="cover-copy"><small>GAMEPLAY PREVIEW · 9:16 MOBILE</small><strong>驶向雾境深处</strong></div>
+      </div>
+      <div class="content">
+        <p class="eyebrow">GAME DEVELOPMENT · COCOS CREATOR</p>
+        <span class="version">Version 1.0 Preview</span>
+        <h1 id="project-title">萤火列车：雾境远征</h1>
+        <p class="english">Firefly Train: Mistland Expedition</p>
+        <p class="subtitle">原创竖屏 Roguelike 射击游戏</p>
+        <p class="description">《萤火列车：雾境远征》是一款基于 Cocos Creator 3.8.8 与 TypeScript 独立开发的竖屏 Roguelike 射击游戏。操控林茉或罗恩守护列车，在四章节远征中构筑随机能力、装备与战斗流派。</p>
+        <ul class="tags" aria-label="技术栈"><li>Cocos Creator 3.8.8</li><li>TypeScript</li><li>Web</li><li>Windows</li><li>Android</li></ul>
+        <div class="primary-actions">
+          <a class="button button--play" href="/game/firefly-train/">在线试玩</a>
+          <a class="button" href="https://github.com/Naganohara-Mio1412/firefly-train-releases/releases/download/v1.0.0/FireflyTrain_Windows_v1.0.zip" target="_blank" rel="noopener noreferrer">下载 Windows V1.0</a>
+          <a class="button" href="https://github.com/Naganohara-Mio1412/firefly-train-releases/releases/download/v1.0.0/FireflyTrain_Android_v1.0.apk" target="_blank" rel="noopener noreferrer">Android 测试版</a>
+        </div>
+        <a class="release-link" href="https://github.com/Naganohara-Mio1412/firefly-train-releases/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer">查看版本说明 ↗</a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="features-title">
+      <div class="section-head"><span>01 / FEATURES</span><div><h2 id="features-title">核心特点</h2><p>围绕移动生存、随机构筑与列车防守组成完整远征流程。</p></div></div>
+      <div class="features">
+        <article class="feature"><span>CHAPTERS</span><h3>四章节战斗</h3><p>从微光森林到雷鸣废都，每章拥有独立敌人、环境与 Boss。</p></article>
+        <article class="feature"><span>CHARACTERS</span><h3>林茉 / 罗恩</h3><p>双角色拥有不同定位、攻击表现与主动技能。</p></article>
+        <article class="feature"><span>BUILD</span><h3>随机能力成长</h3><p>局内升级三选一，组合弹道、火力与生存能力。</p></article>
+        <article class="feature"><span>EQUIPMENT</span><h3>装备与弹匣</h3><p>武器、核心、装置，以及弹匣与自动换弹机制。</p></article>
+        <article class="feature"><span>SURVIVAL</span><h3>完整生存系统</h3><p>Player HP、Shield、Lives 与战斗拾取共同构成生存循环。</p></article>
+        <article class="feature"><span>ENEMIES</span><h3>多类敌人</h3><p>普通、精英、远程敌人与章节专属战斗机制。</p></article>
+        <article class="feature"><span>BOSS</span><h3>章节 Boss 战</h3><p>阶段变化、技能预警与独立战斗表现。</p></article>
+        <article class="feature"><span>PLATFORMS</span><h3>多平台构建</h3><p>提供 Web 在线体验、Windows 包与 Android 测试版本。</p></article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="platforms-title">
+      <div class="section-head"><span>02 / PLAY</span><div><h2 id="platforms-title">平台与下载</h2><p>优先在线体验，也可以下载桌面或 Android 构建。</p></div></div>
+      <div class="platforms">
+        <article class="platform"><span class="platform__status">ONLINE DEMO</span><h3>Web</h3><p>无需安装，直接在浏览器中开始竖屏远征。</p><a class="button button--play" href="/game/firefly-train/">在线试玩</a></article>
+        <article class="platform"><span class="platform__status">RELEASE CANDIDATE</span><h3>Windows</h3><p>约 132 MiB · Windows 10/11 64 位</p><p class="instructions">下载 ZIP → 完整解压 → 运行游戏程序。请勿直接在压缩包内运行。</p><a class="button" href="https://github.com/Naganohara-Mio1412/firefly-train-releases/releases/download/v1.0.0/FireflyTrain_Windows_v1.0.zip" target="_blank" rel="noopener noreferrer">下载 Windows V1.0</a></article>
+        <article class="platform"><span class="platform__status">TEST BUILD</span><h3>Android 测试版</h3><p>约 116.5 MiB · ARM64 · Android 测试版</p><p class="instructions">下载 APK → 在 Android 设备安装。尚未完成完整真机验收。</p><a class="button" href="https://github.com/Naganohara-Mio1412/firefly-train-releases/releases/download/v1.0.0/FireflyTrain_Android_v1.0.apk" target="_blank" rel="noopener noreferrer">下载 Android 测试版</a></article>
+      </div>
+      <p class="notice">部分手机安装网站直接分发的 APK 时，可能显示“未知来源应用”安全提示。请仅在确认文件来源可信后，由用户自行决定是否允许安装。</p>
+    </section>
+
+    <footer>Cocos Creator 3.8.8 · TypeScript · Web / Windows / Android</footer>
+  </main>
+</body>
+</html>

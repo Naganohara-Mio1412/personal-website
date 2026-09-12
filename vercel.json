@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/game/firefly-train",
+      "destination": "/game/firefly-train/index.html"
+    },
+    {
+      "source": "/game/firefly-train/",
+      "destination": "/game/firefly-train/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}

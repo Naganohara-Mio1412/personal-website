@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>萤火列车：雾境远征</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#08111d">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="style.b0bb4.css">
+</head>
+<body>
+  <!-- 子框架交给Cocos按真实DOM矩形换算触摸，不改变750×1334设计分辨率。 -->
+  <main id="WebGameStage">
+    <div id="GameDiv" cc_exact_fit_screen="false">
+      <div id="Cocos3dGameContainer">
+        <canvas id="GameCanvas" tabindex="0" aria-label="萤火列车游戏画面"></canvas>
+      </div>
+    </div>
+  </main>
+  <script src="web-shell.9c960.js"></script>
+  
+
+<!-- Polyfills bundle. -->
+
+<script src="src/polyfills.bundle.5adbf.js" charset="utf-8"> </script>
+
+
+<!-- SystemJS support. -->
+<script src="src/system.bundle.543e6.js" charset="utf-8"> </script>
+
+<!-- Import map -->
+<script src="src/import-map.4e643.json" type="systemjs-importmap" charset="utf-8"> </script>
+
+<script>
+    System.import('./index.3c1f3.js').catch(function(err) { console.error(err); })
+</script>
+
+</body>
+</html>
