@@ -606,81 +606,152 @@ function DataCleaningProjectDetail() {
 }
 
 function GameShowcase() {
+  const [activeGame, setActiveGame] = useState(0)
+  const [slideDirection, setSlideDirection] = useState(1)
+  const touchStartX = useRef(null)
+  const gameCount = 2
+
+  const changeGame = (step) => {
+    setSlideDirection(step >= 0 ? 1 : -1)
+    setActiveGame((current) => (current + step + gameCount) % gameCount)
+  }
+
+  const selectGame = (index) => {
+    if (index === activeGame) return
+    setSlideDirection(index > activeGame ? 1 : -1)
+    setActiveGame(index)
+  }
+
   return (
     <section className="game-showcase section" id="game">
       <div className="container">
         <SectionHeader number="03" title="浏览器游戏" description="从独立游戏开发到网页交互实验，直接在浏览器中体验完整作品" />
-        <div className="game-showcase__list">
-          <article className="game-showcase__layout game-showcase__entry game-showcase__entry--featured" data-reveal>
-            <div className="game-showcase__copy">
-              <p className="game-showcase__eyebrow">GAME DEVELOPMENT · COCOS CREATOR</p>
-              <h3>萤火列车：雾境远征</h3>
-              <p>使用 Cocos Creator 3.8.8 与 TypeScript 独立开发的原创竖屏 Roguelike 射击游戏。操控林茉或罗恩守护萤火号，在四章节战斗中组合能力、装备与角色技能。</p>
-              <dl className="game-showcase__facts">
-                <div><dt>04</dt><dd>完整章节</dd></div>
-                <div><dt>02</dt><dd>出战角色</dd></div>
-                <div><dt>09</dt><dd>局内能力</dd></div>
-              </dl>
-              <ul className="game-showcase__tags" aria-label="萤火列车使用的技术">
-                <li>Game Development</li><li>Cocos Creator</li><li>TypeScript</li><li>Web</li>
-              </ul>
-              <div className="game-showcase__actions">
-                <a className="button game-showcase__button" href={FIREFLY_GAME_URL}>
-                  在线试玩 <span aria-hidden="true">↗</span>
-                </a>
-                <a className="button game-showcase__button game-showcase__button--secondary" href={FIREFLY_PROJECT_URL}>
-                  项目详情
-                </a>
-              </div>
+        <div
+          className="game-showcase__carousel"
+          data-reveal
+          role="region"
+          aria-roledescription="轮播"
+          aria-label="游戏作品切换"
+          tabIndex="0"
+          onKeyDown={(event) => {
+            if (event.key === 'ArrowLeft') {
+              event.preventDefault()
+              changeGame(-1)
+            }
+            if (event.key === 'ArrowRight') {
+              event.preventDefault()
+              changeGame(1)
+            }
+          }}
+          onTouchStart={(event) => { touchStartX.current = event.changedTouches[0]?.clientX ?? null }}
+          onTouchEnd={(event) => {
+            if (touchStartX.current === null) return
+            const endX = event.changedTouches[0]?.clientX ?? touchStartX.current
+            const distance = touchStartX.current - endX
+            touchStartX.current = null
+            if (Math.abs(distance) < 45) return
+            changeGame(distance > 0 ? 1 : -1)
+          }}
+        >
+          <div className="game-showcase__carousel-nav">
+            <span className="game-showcase__counter" aria-live="polite">
+              {String(activeGame + 1).padStart(2, '0')} / {String(gameCount).padStart(2, '0')}
+            </span>
+            <div className="game-showcase__arrows">
+              <button type="button" onClick={() => changeGame(-1)} aria-label="查看上一个游戏">←</button>
+              <button type="button" onClick={() => changeGame(1)} aria-label="查看下一个游戏">→</button>
             </div>
+          </div>
 
-            <div className="game-window game-window--firefly">
-              <div className="game-window__bar" aria-hidden="true">
-                <span /><span /><span /><small>COCOS CREATOR / WEB MOBILE</small>
-              </div>
-              <div className="game-window__viewport game-window__viewport--cover">
-                <img src="/firefly-train-cover.png" alt="《萤火列车：雾境远征》微光森林战斗场景" />
-                <div className="game-window__cover-copy" aria-hidden="true">
-                  <small>FIREFLY TRAIN</small>
-                  <strong>驶向雾境深处</strong>
-                </div>
-                <a href={FIREFLY_GAME_URL} target="_blank" rel="noreferrer" aria-label="在新页面打开萤火列车：雾境远征">
-                  <span>进入远征</span><b aria-hidden="true">↗</b>
-                </a>
-              </div>
-            </div>
-          </article>
+          <div className="game-showcase__stage">
+            <div key={activeGame} className={`game-showcase__slide game-showcase__slide--${slideDirection > 0 ? 'next' : 'previous'}`}>
+              {activeGame === 0 ? (
+                <article className="game-showcase__layout game-showcase__entry game-showcase__entry--featured">
+                  <div className="game-showcase__copy">
+                    <p className="game-showcase__eyebrow">GAME DEVELOPMENT · COCOS CREATOR</p>
+                    <h3>萤火列车：雾境远征</h3>
+                    <p>使用 Cocos Creator 3.8.8 与 TypeScript 独立开发的原创竖屏 Roguelike 射击游戏。操控林茉或罗恩守护萤火号，在四章节战斗中组合能力、装备与角色技能。</p>
+                    <dl className="game-showcase__facts">
+                      <div><dt>04</dt><dd>完整章节</dd></div>
+                      <div><dt>02</dt><dd>出战角色</dd></div>
+                      <div><dt>09</dt><dd>局内能力</dd></div>
+                    </dl>
+                    <ul className="game-showcase__tags" aria-label="萤火列车使用的技术">
+                      <li>Game Development</li><li>Cocos Creator</li><li>TypeScript</li><li>Web</li>
+                    </ul>
+                    <div className="game-showcase__actions">
+                      <a className="button game-showcase__button" href={FIREFLY_GAME_URL}>
+                        在线试玩 <span aria-hidden="true">↗</span>
+                      </a>
+                      <a className="button game-showcase__button game-showcase__button--secondary" href={FIREFLY_PROJECT_URL}>
+                        项目详情
+                      </a>
+                    </div>
+                  </div>
 
-          <article className="game-showcase__layout game-showcase__entry" data-reveal>
-            <div className="game-showcase__copy">
-              <p className="game-showcase__eyebrow">ORIGINAL 2D STRATEGY GAME</p>
-              <h3>花园防线：月光守卫</h3>
-              <p>一款原创横向分路塔防游戏。玩家通过生产能量晶、组合不同守卫并把握波次节奏，抵御从多条路线推进的灰影军团。</p>
-              <dl className="game-showcase__facts">
-                <div><dt>05</dt><dd>分路战场</dd></div>
-                <div><dt>08</dt><dd>原创守卫</dd></div>
-                <div><dt>05</dt><dd>主题关卡</dd></div>
-              </dl>
-              <ul className="game-showcase__tags" aria-label="月光守卫使用的技术">
-                <li>HTML5 Canvas</li><li>JavaScript</li><li>原创美术</li><li>响应式交互</li>
-              </ul>
-              <a className="button game-showcase__button" href={GAME_URL} target="_blank" rel="noreferrer">
-                开始游戏 <span aria-hidden="true">↗</span>
-              </a>
-            </div>
+                  <div className="game-window game-window--firefly">
+                    <div className="game-window__bar" aria-hidden="true">
+                      <span /><span /><span /><small>COCOS CREATOR / WEB MOBILE</small>
+                    </div>
+                    <div className="game-window__viewport game-window__viewport--cover">
+                      <img src="/firefly-train-cover.png" alt="《萤火列车：雾境远征》微光森林战斗场景" />
+                      <div className="game-window__cover-copy" aria-hidden="true">
+                        <small>FIREFLY TRAIN</small>
+                        <strong>驶向雾境深处</strong>
+                      </div>
+                      <a href={FIREFLY_GAME_URL} target="_blank" rel="noreferrer" aria-label="在新页面打开萤火列车：雾境远征">
+                        <span>进入远征</span><b aria-hidden="true">↗</b>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              ) : (
+                <article className="game-showcase__layout game-showcase__entry">
+                  <div className="game-showcase__copy">
+                    <p className="game-showcase__eyebrow">ORIGINAL 2D STRATEGY GAME</p>
+                    <h3>花园防线：月光守卫</h3>
+                    <p>一款原创横向分路塔防游戏。玩家通过生产能量晶、组合不同守卫并把握波次节奏，抵御从多条路线推进的灰影军团。</p>
+                    <dl className="game-showcase__facts">
+                      <div><dt>05</dt><dd>分路战场</dd></div>
+                      <div><dt>08</dt><dd>原创守卫</dd></div>
+                      <div><dt>05</dt><dd>主题关卡</dd></div>
+                    </dl>
+                    <ul className="game-showcase__tags" aria-label="月光守卫使用的技术">
+                      <li>HTML5 Canvas</li><li>JavaScript</li><li>原创美术</li><li>响应式交互</li>
+                    </ul>
+                    <a className="button game-showcase__button" href={GAME_URL} target="_blank" rel="noreferrer">
+                      开始游戏 <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
 
-            <div className="game-window">
-              <div className="game-window__bar" aria-hidden="true">
-                <span /><span /><span /><small>HTML5 / CANVAS</small>
-              </div>
-              <div className="game-window__viewport">
-                <iframe title="花园防线：月光守卫游戏预览" src={GAME_URL} loading="lazy" scrolling="no" tabIndex="-1" />
-                <a href={GAME_URL} target="_blank" rel="noreferrer" aria-label="在新页面打开花园防线：月光守卫">
-                  <span>打开完整游戏</span><b aria-hidden="true">↗</b>
-                </a>
-              </div>
+                  <div className="game-window">
+                    <div className="game-window__bar" aria-hidden="true">
+                      <span /><span /><span /><small>HTML5 / CANVAS</small>
+                    </div>
+                    <div className="game-window__viewport">
+                      <iframe title="花园防线：月光守卫游戏预览" src={GAME_URL} loading="lazy" scrolling="no" tabIndex="-1" />
+                      <a href={GAME_URL} target="_blank" rel="noreferrer" aria-label="在新页面打开花园防线：月光守卫">
+                        <span>打开完整游戏</span><b aria-hidden="true">↗</b>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              )}
             </div>
-          </article>
+          </div>
+
+          <div className="game-showcase__dots" aria-label="选择游戏">
+            {['萤火列车：雾境远征', '花园防线：月光守卫'].map((name, index) => (
+              <button
+                className={activeGame === index ? 'is-active' : ''}
+                type="button"
+                key={name}
+                onClick={() => selectGame(index)}
+                aria-label={`查看${name}`}
+                aria-current={activeGame === index ? 'true' : undefined}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
