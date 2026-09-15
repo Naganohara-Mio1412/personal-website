@@ -3,9 +3,11 @@ import { cleanDataset, datasetToCsv, downloadText, getSampleDataset, readDataset
 
 const EMAIL = 'yanami_trade@163.com'
 const PHONE = '17734946856'
-const GAME_URL = '/moonlight-guardian.html'
-const FIREFLY_GAME_URL = '/game/firefly-train/'
-const FIREFLY_PROJECT_URL = '/projects/firefly-train.html'
+const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
+const GAME_URL = withBase('moonlight-guardian.html')
+const FIREFLY_GAME_URL = withBase('game/firefly-train/')
+const FIREFLY_PROJECT_URL = withBase('projects/firefly-train.html')
+const FIREFLY_COVER_URL = withBase('firefly-train-cover.png')
 
 const projectCategories = [
   {
@@ -694,7 +696,7 @@ function GameShowcase() {
                       <span /><span /><span /><small>COCOS CREATOR / WEB MOBILE</small>
                     </div>
                     <div className="game-window__viewport game-window__viewport--cover">
-                      <img src="/firefly-train-cover.png" alt="《萤火列车：雾境远征》微光森林战斗场景" />
+                      <img src={FIREFLY_COVER_URL} alt="《萤火列车：雾境远征》微光森林战斗场景" />
                       <div className="game-window__cover-copy" aria-hidden="true">
                         <small>FIREFLY TRAIN</small>
                         <strong>驶向雾境深处</strong>
