@@ -1,0 +1,9 @@
+pandas
+numpy
+openpyxl
+plotly
+jinja2
+charset-normalizer
+python-dateutil
+pytest
+PyYAML

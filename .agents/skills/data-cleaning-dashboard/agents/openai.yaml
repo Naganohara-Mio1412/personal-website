@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Cleaning Dashboard"
+  short_description: "Safe data cleaning, quality reports, and offline dashboards"
+  default_prompt: "Use $data-cleaning-dashboard to safely clean this dataset and generate an Excel report plus an offline interactive dashboard."

@@ -1,0 +1,8 @@
+﻿ Customer ID , Name , order_date , amount , completion_percent , active , category , score , business_note , completely_empty 
+001, Alice ,2024-01-01,"1,200.50",10%,TRUE,Beijing,10,priority,
+002,Bob,2024/01/02,800,25%,yes,beijing,11,,
+003, Carol,2024年1月3日,950.25,50%,No,Shanghai,999999,N/A,
+002,Bob,2024/01/02,800,25%,yes,beijing,11,,
+004,Dana ,2024-01-04,"1,050",75%,0,ShangHai,12,review,
+,,,,,,,,,
+005, Eva ,2024/01/05,"1,100",100%,是,Beijing,13,null,
